@@ -8,7 +8,7 @@ A creative and animated weather dashboard built using the [WeatherAPI](https://w
 - Air Quality Index (AQI), humidity, UV, pressure, etc.
 
 🚀 Live Demo
-👉 [Click here to view](https://aanchal178.github.io/weather-app/)
+👉 [Click here to view](https://aanchal178.github.io/weather_app/)
 
 🛠️ Tech Stack
 - HTML5, CSS3, JavaScript (vanilla)
