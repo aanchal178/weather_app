@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Weatherly-Smarter Skies, Beautifully Delivered</title>
+  <title>Weatherly — Smarter Skies. Beautifully Delivered.</title>
   <style>
     :root{
       --glass: rgba(255,255,255,0.08);
@@ -20,7 +20,7 @@
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       color: #fff;
       -webkit-font-smoothing:antialiased;
-      background: linear-gradient(120deg,#0f172a 0%, #071123 40%, #082d3f 100%);
+      background: linear-gradient(135deg, #4b6cb7, #182848);
       overflow:hidden;
       display:flex;
       align-items:center;
@@ -28,51 +28,57 @@
       padding:32px;
     }
 
-    /* Moving background layers */
-    .sky{
-      position:fixed;inset:0;z-index:-2;pointer-events:none;
-      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.03), transparent 6%),
-                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.02), transparent 8%);
-      animation: drift 30s linear infinite;
-    }
-    @keyframes drift{from{transform:translateY(0) rotate(0)} to{transform:translateY(-20px) rotate(1deg)}}
-
-    /* Clouds GIF overlay (semi-transparent) */
-    .clouds{
-      position:fixed;inset:0;z-index:-1;opacity:0.35;background-repeat:repeat-x;background-size:contain;
-      background-image: url('https://i.imgur.com/OYVpe2W.png'); /* subtle cloud strip */
-      animation:cloudslide 70s linear infinite;
-    }
-    @keyframes cloudslide{from{background-position:0 0} to{background-position:10000px 0}}
-
     .app{
-      width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border-radius:24px;padding:22px;backdrop-filter: blur(var(--blur));box-shadow:0 10px 40px rgba(2,6,23,0.6);
-      display:grid;grid-template-columns: 1fr 360px;gap:18px;
+      width:100%;max-width:980px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:24px;
+      padding:22px;
+      backdrop-filter: blur(var(--blur));
+      box-shadow:0 10px 40px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:18px;
       border:1px solid rgba(255,255,255,0.04);
     }
 
-    /* Left - controls + main */
     .left{
       padding:12px;display:flex;flex-direction:column;gap:12px;
     }
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#56CCF2,#2F80ED);display:flex;align-items:center;justify-content:center;font-weight:700}
-    .brand h1{font-size:18px;margin:0}
+    .logo{
+      width:54px;height:54px;border-radius:12px;
+      background:linear-gradient(135deg,#56CCF2,#2F80ED);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:22px;
+    }
+    .brand h1{font-size:20px;margin:0}
     .brand p{margin:0;font-size:12px;opacity:0.85}
 
     .search{
       display:flex;gap:10px;align-items:center
     }
     .search input{
-      flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:inherit;outline:none;font-size:14px
+      flex:1;padding:12px 14px;border-radius:12px;
+      border:1px solid rgba(255,255,255,0.05);
+      background:transparent;color:inherit;
+      outline:none;font-size:14px
     }
-    .search button{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#6EE7B7,#3B82F6);color:#05252f;font-weight:700;cursor:pointer}
-    .search .mini{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:12px;cursor:pointer}
+    .search button{
+      padding:10px 14px;border-radius:12px;border:none;
+      background:linear-gradient(90deg,#6EE7B7,#3B82F6);
+      color:#05252f;font-weight:700;cursor:pointer
+    }
+    .search .mini{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);
+      padding:10px;border-radius:12px;cursor:pointer
+    }
 
     .mainCard{
-      margin-top:8px;padding:18px;border-radius:16px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.04);
-      display:flex;gap:14px;align-items:center;transition:transform var(--trans);
+      margin-top:8px;padding:18px;border-radius:16px;
+      background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;gap:14px;align-items:center;
+      transition:transform var(--trans);
     }
     .mainCard:hover{transform:translateY(-6px)}
 
@@ -82,44 +88,45 @@
     .icon{width:110px;height:110px;display:flex;align-items:center;justify-content:center}
     .icon img{max-width:100%;filter:drop-shadow(0 6px 18px rgba(2,6,23,0.6))}
 
-    /* Right column - details */
     .right{padding:12px;display:flex;flex-direction:column;gap:12px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      padding:12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,0.04)
+    }
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .stat{padding:10px;border-radius:12px;background:var(--accent);text-align:center}
     .stat h3{margin:0;font-size:18px}
     .stat p{margin:4px 0 0 0;font-size:12px;opacity:0.9}
-
     .footer{font-size:12px;opacity:0.8;margin-top:8px}
 
-    /* Toggle */
     .toggle{display:flex;align-items:center;gap:8px}
-    .switch{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,0.06);position:relative;padding:3px;cursor:pointer}
-    .knob{width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;left:4px;top:3px;transition:left 220ms}
+    .switch{
+      width:46px;height:26px;border-radius:20px;
+      background:rgba(255,255,255,0.06);
+      position:relative;padding:3px;cursor:pointer
+    }
+    .knob{
+      width:20px;height:20px;border-radius:50%;
+      background:#fff;position:absolute;left:4px;top:3px;
+      transition:left 220ms
+    }
     .switch.on{background:linear-gradient(90deg,#FDBA74,#FB7185)}
     .switch.on .knob{left:22px}
 
-    /* small responsive */
     @media (max-width:880px){
       .app{grid-template-columns:1fr;max-width:720px}
     }
-
-    /* small animated sparkle */
-    .sparkle{position:absolute;right:20px;top:12px;width:12px;height:12px;border-radius:50%;box-shadow:0 0 18px 6px rgba(255,255,255,0.05);opacity:0.6}
-
   </style>
 </head>
 <body>
-  <div class="sky"></div>
-  <div class="clouds" aria-hidden="true"></div>
-
-  <div class="app" role="application" aria-label="Interactive Weather App">
+  <div class="app" role="application" aria-label="Weatherly App">
     <div class="left">
       <div class="brand">
         <div class="logo">W</div>
         <div>
-          <h1>Interactive Weather</h1>
-          <p>Live data from WeatherAPI — creative, animated &amp; interactive</p>
+          <h1>Weatherly</h1>
+          <p>Smarter Skies. Beautifully Delivered.</p>
         </div>
       </div>
 
@@ -164,14 +171,12 @@
         </div>
         <div style="margin-top:10px;font-size:13px;opacity:0.9" id="airQualities">Air quality details will appear here when available.</div>
       </div>
-
     </div>
 
     <div class="right">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <strong>Details</strong>
-          <div class="sparkle" aria-hidden="true"></div>
         </div>
         <div class="grid" style="margin-top:10px">
           <div class="stat"><h3 id="feelsLike">--°</h3><p>Feels like</p></div>
@@ -197,12 +202,10 @@
   </div>
 
   <script>
-    // ====== CONFIG (uses the API key you provided) ======
     const WEATHER_API_KEY = 'a7dd582b40e948d28ea131544250311';
     const API_BASE = 'https://api.weatherapi.com/v1/current.json';
-
-    // ====== helpers and DOM ======
     const $ = id => document.getElementById(id);
+
     const cityInput = $('cityInput');
     const searchBtn = $('searchBtn');
     const locBtn = $('locBtn');
@@ -223,7 +226,7 @@
     const sunriseSet = $('sunriseSet');
     const unitSwitch = $('unitSwitch');
 
-    let useC = true; // default
+    let useC = true;
 
     function setLoading(){
       condText.textContent = 'Loading…';
@@ -260,47 +263,29 @@
     }
 
     function render(data){
-      // location & time
       const loc = data.location;
       const cur = data.current;
       locationText.textContent = `${loc.name}, ${loc.region || loc.country}`;
       localTime.textContent = loc.localtime || '—';
-
-      // condition
       condText.textContent = cur.condition?.text || '—';
       condIcon.src = cur.condition?.icon ? 'https:' + cur.condition.icon : condIcon.src;
-
-      // temps
       tempVal.textContent = formatTemp(cur.temp_c);
       feelsLike.textContent = formatSmallTemp(cur.feelslike_c);
-
-      // meta
       humidity.textContent = (cur.humidity ?? '—') + '%';
       pressure.textContent = (cur.pressure_mb ?? '—') + ' mb';
       uv.textContent = (cur.uv ?? '—');
       cloud.textContent = (cur.cloud ?? '—') + '%';
       windVal.textContent = (cur.wind_kph ?? '—') + ' kph • ' + (cur.wind_dir || '—');
       lastUpdated.textContent = cur.last_updated || loc.localtime || '—';
-
-      // sunrise/sunset: WeatherAPI current.json doesn't include astro; show placeholder if not available
-      if(data.forecast && data.forecast.forecastday && data.forecast.forecastday[0].astro){
-        const astro = data.forecast.forecastday[0].astro;
-        sunriseSet.innerHTML = `<strong>Sunrise / Sunset:</strong> ${astro.sunrise} / ${astro.sunset}`;
-      } else {
-        // try to estimate sunrise/sunset? for now show not available
-        sunriseSet.innerHTML = `<strong>Sunrise / Sunset:</strong> Not available in current endpoint`;
-      }
-
-      // AQI
-      const aq = cur.air_quality || data.current?.air_quality || null;
+      const aq = cur.air_quality || null;
       if(aq){
-        // WeatherAPI returns values like 'us-epa-index'
-        const epa = aq['us-epa-index'] ?? aq['gb-defra-index'] ?? null;
+        const epa = aq['us-epa-index'] ?? null;
         aqiVal.textContent = epa !== null ? epa : '—';
-        // show some components
-        const comps = ['pm2_5','pm10','o3','no2','so2','co'].map(k => ({k,val:aq[k]})).filter(it => it.val!==undefined && it.val!==null);
+        const comps = ['pm2_5','pm10','o3','no2','so2','co']
+          .map(k => ({k,val:aq[k]}))
+          .filter(it => it.val!==undefined && it.val!==null);
         if(comps.length){
-          airQualities.innerHTML = comps.map(c=>`<div><strong>${c.k}:</strong> ${Number(c.val).toFixed(2)}</div>`).join('')
+          airQualities.innerHTML = comps.map(c=>`<div><strong>${c.k}:</strong> ${Number(c.val).toFixed(2)}</div>`).join('');
         } else {
           airQualities.textContent = 'AQ data present but no detailed components.';
         }
@@ -308,28 +293,8 @@
         aqiVal.textContent = '—';
         airQualities.textContent = 'Air quality not available for this location.';
       }
-
-      // subtle theme change depending on condition
-      applyTheme(cur.condition?.text || '');
     }
 
-    function applyTheme(conditionText){
-      const body = document.body;
-      const ct = (conditionText || '').toLowerCase();
-      if(ct.includes('rain')||ct.includes('shower')){
-        body.style.background = 'linear-gradient(120deg,#0f172a 0%, #03203f 40%, #023047 100%)';
-      } else if(ct.includes('snow')){
-        body.style.background = 'linear-gradient(120deg,#0b1020 0%, #184b66 40%, #6fb3e6 100%)';
-      } else if(ct.includes('cloud')){
-        body.style.background = 'linear-gradient(120deg,#08101b 0%, #103042 40%, #2b4a60 100%)';
-      } else if(ct.includes('clear')||ct.includes('sunny')){
-        body.style.background = 'linear-gradient(120deg,#073b3a 0%, #1b7a59 40%, #8dd3a9 100%)';
-      } else {
-        body.style.background = 'linear-gradient(120deg,#0f172a 0%, #071123 40%, #082d3f 100%)';
-      }
-    }
-
-    // ====== events ======
     searchBtn.addEventListener('click', ()=>{
       const q = cityInput.value.trim();
       if(!q) return showError('Please enter a city or coordinates');
@@ -350,31 +315,19 @@
         const lat = pos.coords.latitude.toFixed(5);
         const lon = pos.coords.longitude.toFixed(5);
         fetchWeather(`${lat},${lon}`);
-      },(err)=>{
-        console.error(err);
+      },()=>{
         showError('Could not get location — permission denied or unavailable');
       },{timeout:10000});
     });
 
-    // unit switch
     unitSwitch.addEventListener('click', ()=>{
       useC = !useC;
       unitSwitch.classList.toggle('on', !useC);
-      unitSwitch.setAttribute('aria-checked', String(useC === false));
-      // refresh display if current values exist by re-fetching input or current location
-      const locTextContent = locationText.textContent;
-      // attempt to keep same city query: prefer input value, else location text
-      const q = cityInput.value.trim() || locTextContent.split(',')[0] || '';
+      const q = cityInput.value.trim() || locationText.textContent.split(',')[0] || '';
       if(q) fetchWeather(q);
     });
 
-    // try a default city for demo
     fetchWeather('London');
-
-    // ====== Accessibility: focus styles ======
-    document.addEventListener('keydown', (e)=>{
-      if(e.key==='Tab') document.body.classList.add('showFocus');
-    });
   </script>
 </body>
 </html>
